@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2022 O.S. Systems Software LTDA.
+
+# Automatically run clang-format on the source code. This script must be run from the root directory
+# of the code repository.
+
+set -e
+
+basedir=$(dirname $(dirname $(readlink -f $0)))
+
+cd $basedir
+file_exts=".c .h .cpp .hpp .cc .hh .cxx"
+for EXT in ${file_exts}; do
+    echo "Applying clang-format to ${EXT} files..."
+    find -type f -name "*${EXT}" \
+        -not -path "./build/*"   \
+        -exec clang-format -i -style=file {} ';'
+done

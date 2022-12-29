@@ -1,0 +1,12 @@
+manifest:
+  remotes:
+    - name: zephyrproject-rtos
+      url-base: https://github.com/zephyrproject-rtos
+    - name: freedom
+      url-base: https://github.com/FreedomVeiculosEletricos
+  projects:
+    - name: zephyr
+      remote: freedom
+      revision: e89c174ca984805b2c60bd6484c696e98453b718 # 2022-12-30
+  self:
+    import:

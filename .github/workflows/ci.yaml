@@ -1,0 +1,43 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          path: zephyr-c++-api
+
+      - uses: cachix/install-nix-action@v17
+
+      - name: Check Code Formatting
+        working-directory: zephyr-c++-api
+        run: |
+          nix develop -c bash <<EOF
+            ./scripts/format-code
+
+            if [ -n "$(git status --porcelain)" ]; then
+                echo "ERROR: Code is not properly formatted"
+                git diff
+                exit 1
+            fi
+          EOF
+
+      - name: Initialize
+        working-directory: zephyr-c++-api
+        run: |
+          nix develop -c bash <<EOF
+            west init -l .
+            west update
+          EOF
+
+      - name: Twister Tests
+        working-directory: zephyr-c++-api
+        run: |
+          nix develop -c bash <<EOF
+            ./scripts/run-tests
+          EOF

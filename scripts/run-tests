@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2022 O.S. Systems Software LTDA.
+
+# Run tests for boards. This script must be run from the root directory of the code repository.
+
+[ ! -d ./tests/ ] && echo "WARN: No tests/ directory exists. Ignoring... " && exit 0
+
+basedir=$(dirname $(dirname $(readlink -f $0)))
+
+cd $basedir
+../zephyr/scripts/twister -G --board-root boards/ \
+                             --testsuite-root tests/
