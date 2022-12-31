@@ -8,7 +8,7 @@ addlicense \
     -ignore build \
     -ignore twister-out*/ \
     -c "Freedom Veículos Elétricos LTDA." \
-    -y 2022 \
+    -y 2023 \
     -s=only \
     -l apache \
     .
