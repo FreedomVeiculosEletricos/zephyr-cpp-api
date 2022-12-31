@@ -1,3 +1,6 @@
+# Copyright 2022 Freedom Veículos Elétricos LTDA.
+# SPDX-License-Identifier: Apache-2.0
+
 name: CI
 
 on: [push, pull_request]
@@ -19,6 +22,19 @@ jobs:
         run: |
           nix develop -c bash <<EOF
             ./scripts/format-code
+
+            if [ -n "$(git status --porcelain)" ]; then
+                echo "ERROR: Code is not properly formatted"
+                git diff
+                exit 1
+            fi
+          EOF
+
+      - name: Check License Headers
+        working-directory: zephyr-c++-api
+        run: |
+          nix develop -c bash <<EOF
+            ./scripts/license-headers
 
             if [ -n "$(git status --porcelain)" ]; then
                 echo "ERROR: Code is not properly formatted"
