@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+basedir=$(dirname $(dirname $(readlink -f $0)))
+
+cd $basedir
+addlicense \
+    -v \
+    -ignore build \
+    -ignore twister-out*/ \
+    -c "Freedom Veículos Elétricos LTDA." \
+    -y 2022 \
+    -s=only \
+    -l apache \
+    .

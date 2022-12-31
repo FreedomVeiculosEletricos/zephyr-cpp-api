@@ -1,3 +1,6 @@
+# Copyright 2022 Freedom Veículos Elétricos LTDA.
+# SPDX-License-Identifier: Apache-2.0
+
 common:
     tags: drivers gpio
     depends_on: gpio

@@ -19,6 +19,7 @@
     {
       devShells.default = inputs.zephyr-arm-dev.devShells.${system}.default.overrideAttrs (final: prev: {
         buildInputs = prev.buildInputs ++ [
+          pkgs.addlicense
           pkgs.clang
         ];
       });
