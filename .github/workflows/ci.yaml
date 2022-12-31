@@ -24,6 +24,13 @@ jobs:
           name: freedom-zephyr-cpp-api
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
+      - name: Evaluate Nix Development Shell
+        working-directory: zephyr-c++-api
+        run: |
+          # Does nothing but ensures we have a clear understand of time spent during download and
+          # evaluation of the shell expression.
+          nix develop
+
       - name: Check Code Formatting
         working-directory: zephyr-c++-api
         run: |
