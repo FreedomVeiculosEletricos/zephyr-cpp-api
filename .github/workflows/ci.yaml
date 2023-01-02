@@ -35,42 +35,43 @@ jobs:
           nix develop
 
       - name: Check Code Formatting
-        working-directory: zephyr-c++-api
-        run: |
-          nix develop -c bash <<EOF
+        uses: workflow/nix-shell-action@v3.2.0
+        with:
+          working-directory: zephyr-c++-api
+          script: |
             ./scripts/format-code
 
-            if [ -n "$(git status --porcelain)" ]; then
+            if [ -n "$(git status --untracked-files=no --porcelain=v1)" ]; then
                 echo "ERROR: Code is not properly formatted"
                 git diff
                 exit 1
             fi
-          EOF
 
       - name: Check License Headers
-        working-directory: zephyr-c++-api
-        run: |
-          nix develop -c bash <<EOF
+        uses: workflow/nix-shell-action@v3.2.0
+        with:
+          working-directory: zephyr-c++-api
+          script: |
+            set -x
             ./scripts/license-headers
 
-            if [ -n "$(git status --porcelain)" ]; then
-                echo "ERROR: Code is not properly formatted"
+            if [ -n "$(git status --untracked-files=no --porcelain=v1)" ]; then
+                echo "ERROR: Missing license on one or more headers"
                 git diff
                 exit 1
             fi
-          EOF
 
       - name: Initialize
-        working-directory: zephyr-c++-api
-        run: |
-          nix develop -c bash <<EOF
+        uses: workflow/nix-shell-action@v3.2.0
+        with:
+          working-directory: zephyr-c++-api
+          script: |
             west init -l .
             west update
-          EOF
 
       - name: Twister Tests
-        working-directory: zephyr-c++-api
-        run: |
-          nix develop -c bash <<EOF
+        uses: workflow/nix-shell-action@v3.2.0
+        with:
+          working-directory: zephyr-c++-api
+          script: |
             ./scripts/run-tests
-          EOF
