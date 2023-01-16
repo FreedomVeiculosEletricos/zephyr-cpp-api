@@ -1,0 +1,3 @@
+tests:
+  calculator.api:
+      tags: calc
