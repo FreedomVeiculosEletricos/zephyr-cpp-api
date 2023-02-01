@@ -31,3 +31,4 @@ ZTEST_F(gpio_basic_api, test_get)
 
 ZTEST_SUITE(gpio_basic_api,  NULL, NULL, NULL, NULL,
 	    NULL);
+		
