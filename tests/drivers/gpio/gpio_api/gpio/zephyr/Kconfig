@@ -1,0 +1,4 @@
+#Copyright 2022 Freedom Veículos Elétricos LTDA.
+#SPDX - License - Identifier : Apache - 2.0
+
+config ZPP bool "Support for ZPP out of tree driver"

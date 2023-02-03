@@ -9,7 +9,7 @@ common:
     #  fixture: gpio_loopback
 
 tests:
-  drivers.gpio.2pin:
+  drivers.gpio:
     min_flash: 34
     filter: dt_compat_enabled("test-gpio-basic-api")
     platform_allow: native_posix_64
